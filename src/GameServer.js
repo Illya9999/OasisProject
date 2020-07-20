@@ -102,7 +102,7 @@ class GameServer {
 			leaderboardCount: 10,
 			maxPlayers: 76,
 			gameObjects: 300,
-			gameObjectDistance: 150,
+			gameObjectDistance: 200,
 			gatherMultiplier: 1,
 			saveStats: !0
 		}, config);
