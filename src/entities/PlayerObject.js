@@ -12,13 +12,13 @@ class PlayerObject extends GameObj {
 		this.ownerSID = owner.sid;
 		this.noGather = !0;
 		this.objManager = owner.gameServer.objs;
+		owner.itemCache.push(this);
 	}
 	static place(owner) {
 		owner.wood -= this.costs.wood;
 		owner.stone -= this.costs.stone;
 		owner.food -= this.costs.food;
 		owner.placeCounter[this.group.id]++;
-		owner.updateItemCache();
 	}
 	destroy(destroyer, bypass) {
 		this.owner.placeCounter[this.group.id]--;
