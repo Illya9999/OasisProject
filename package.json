@@ -1,0 +1,21 @@
+{
+  "name": "m.io",
+  "version": "0.0.1",
+  "description": "An open source Moomoo.io server implementation",
+  "main": "tests/test.js",
+  "keywords": [
+    "moomoo.io",
+    "moomoo",
+    "moomoo.io private server"
+  ],
+  "scripts": {
+    "test": "node tests/test.js",
+    "start": "node tests/test.js"
+  },
+  "dependencies": {
+    "eventemitter3": "^4.0.4",
+    "msgpack-lite": "^0.1.26",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v18.3.0"
+  },
+  "license": "MIT"
+}
