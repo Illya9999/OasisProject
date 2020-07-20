@@ -42,6 +42,7 @@ in your browser, install oasis.user.js to tampermoneky or another userscript man
 
 # FAQ
 Q: I thought the oasis had an anticheat?
+
 A: Yes we do. We decided to keep that closed source though.
 
 # Directory roadmap
