@@ -40,6 +40,10 @@ npm run test; # Will start the server on port 5000
 The Oasis is a *server*, not a client. To use the default moomoo.io client, start the server and
 in your browser, install oasis.user.js to tampermoneky or another userscript manager. Then visit oasis.moomoo.io
 
+# FAQ
+Q: I thought the oasis had an anticheat?
+A: Yes we do. We decided to keep that closed source though.
+
 # Directory roadmap
 **THIS STUFF DOESNT REALLY REFLECT THE CURRENT STATE OF THE REPO**
 `src/` - The server source code<br>
