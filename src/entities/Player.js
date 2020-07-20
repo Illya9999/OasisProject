@@ -281,6 +281,7 @@ class Player {
 		//if (++this.placedInOneFrame > 5) return this.socket.dc('lol');
 		var item = Items.list[me.items[me.items.indexOf(me.buildCode)]];
 		if (item && item.place) item.place(me, dir);
+		me.gameServer.manager.updatePlacedItems(this.socket, item.group.id, this.placeCounter[item.group.id]);
 		me.gameServer.manager.updateMaterials(me.socket);
 	}
 	applyDot() {
