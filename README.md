@@ -1,6 +1,9 @@
 # The Oasis project
 The goal of the Oasis project is to create a server that is free from hacks and crashes so that it is actually playable
 
+This project is based off of m.io by wwwg. You can find his repo here 
+https://github.com/wwwg/m.io
+
 # What does the Oasis currently support?
 Here is a list of the features implemented, please note that the project is currently work in progress.
 - Player managment: ✓
