@@ -18,9 +18,11 @@ class PlayerObject extends GameObj {
 		owner.stone -= this.costs.stone;
 		owner.food -= this.costs.food;
 		owner.placeCounter[this.group.id]++;
+		owner.updateItemCache();
 	}
 	destroy(destroyer, bypass) {
 		this.owner[this.group.id]--;
+		this.owner.gameServer.manager.updatePlacedItems(this.owner.socket, this.group.id, this.owner.placeCounter[this.group.id]);
 		this.objManager.removeObject(this.sid);
 		//if(bypass) return;
 		//this.owner.placed.splice(this.owner.placed.indexOf(this), 1);
