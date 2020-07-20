@@ -51,6 +51,7 @@ class GameManager {
 			let x = this.getRandCoord();
 			let y = this.getRandCoord();
 			let badPlace = !0;
+			//can someone fix this
 			while (Math.min(...this.objs.map(o => Utils.getDist(o.x, o.y, x, y))) < distance || badPlace) {
 				if (myObj.wood == 1) {
 					x = this.getRandCoord();
