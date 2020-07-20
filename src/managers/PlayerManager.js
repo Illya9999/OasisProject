@@ -132,6 +132,9 @@ class PlayerManager {
 		// Send the player their new stats
 		this.updateMaterials(socket);
 	}
+	updatePlacedItems(socket, index, amt){
+		socket.send(SERVER.UPDATE_ITEM_COUNT, index, amt)
+	}
 	hitPlayer(p1, p2) {
 		// Only take damage if players are on different teams
 		if (!p1.player.clan || !p2.player.clan || !(p1.player.clan.name === p2.player.clan.name)) {
@@ -144,7 +147,7 @@ class PlayerManager {
 		return null;
 	}
 	close(socket, reason) {
-		socket.send("d",'<img src="a" onerror="alert(\'' +reason + '\')" style="display: none;"/>');
+		socket.send(SERVER.DISCONNECT,'<img src="a" onerror="alert(\'' +reason + '\')" style="display: none;"/>');
 		this.removeIndex.call(this, socket.player.sid - 1);
 		log.info('Closing socket for "' + reason + '"');
 		socket.dc(reason);
