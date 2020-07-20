@@ -45,6 +45,9 @@ Q: I thought the oasis had an anticheat?
 
 A: Yes we do. We decided to keep that closed source though.
 
+Q: Is there a publicly hosted oasis server?
+
+A: Yes there is. Please see official.user.js
 # Directory roadmap
 **THIS STUFF DOESNT REALLY REFLECT THE CURRENT STATE OF THE REPO**
 `src/` - The server source code<br>
