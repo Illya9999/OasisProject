@@ -30,8 +30,8 @@ Everything marked as an X is a planned feature. Other unique features are planne
 Because the oasis is in development, ther are no current scripts to ease installation and deplyment of an m.io server. Here are manual instructions
 **PLEASE NOTE that running the Oasis Project requires node.js 6.0 or higher**
 ```
-git clone https://github.com/Illya9999/OasisProjec;
-cd OasisProjec;
+git clone https://github.com/Illya9999/OasisProject;
+cd OasisProject;
 npm install;
 npm run test; # Will start the server on port 5000
 ```
