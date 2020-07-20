@@ -69,7 +69,7 @@ class GameManager {
 			}
 			this.objs[i].setCords(x, y);
 		}
-		this.objs.push(new PlayerObj(amount + 1, { player: { sid: 1, gameServer: { objs: this } } }, 1000, 1000, 0));
+		this.objs.push(new PlayerObj(amount + 1, { player: { sid: 1, gameServer: { objs: this }, itemCache: [] } }, 1000, 1000, 0));
 		let a = new Gold(amount + 2);
 		a.x = a.y = this.gameServer.config.mapSize / 2;
 
