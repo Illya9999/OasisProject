@@ -39,65 +39,64 @@ class GameManager {
 		var me = this;
 		return Utils.rand(me.gameServer.config.mapSize);
 	}
-	generateObjects(amount, distance = 200) {
+	generateObjects(amount, distance = 400) {
+		let mapScale = this.gameServer.config.mapSize;
 		// Create random objects
 		this.objLen = amount;
 		for (var i = 0; i < amount; ++i) {
-			// For now just generate trees
 			var RandomObject = this.getSpawnableObj();
+			let x;
+			let y;
 			let myObj = new RandomObject(i);
-			this.objs.push(myObj);
-
-			let x = this.getRandCoord();
-			let y = this.getRandCoord();
-			let badPlace = !0;
-			//can someone fix this
-			while (Math.min(...this.objs.map(o => Utils.getDist(o.x, o.y, x, y))) < distance || badPlace) {
-				if (myObj.wood == 1) {
-					x = this.getRandCoord();
-					y = this.getRandCoord() - 2500;
-					for (var k = 0; k < 100; k++) if (y - 2500 < 0) {
-						y = this.getRandCoord() - 2500;
-					}
-				} else {
-					x = this.getRandCoord();
-					y = this.getRandCoord();
+			let overlap = false;
+			 switch (myObj.type) {
+				case 0:
+				 x = this.getRandCoord();
+				 y = Utils.randChoice([Utils.randBetween(0, 6850), Utils.randBetween(7550, mapScale-2400)]);
+				if(!this.objs.length)(myObj.setCords(x, y));
+				else{
+				overlap = this.objs.some(o=>Utils.getDist(x, y, o.x,o.y)<distance);
 				}
-				for (var k = 0; k < 100; k++) if (y > 6850 && y < 7550 && !myObj.stone) {
-					y = this.getRandCoord();
-				} //just retries if the object is in the river. did ten iterations so that stuff will almost never spawn in river. and by never, it's like ~ (2000/14400)^10
-				badPlace = !(this.gameServer.phys.checkPlace(myObj, x, y));
-			}
-			this.objs[i].setCords(x, y);
-		}
-		this.objs.push(new PlayerObj(amount + 1, { player: { sid: 1, gameServer: { objs: this }, itemCache: [] } }, 1000, 1000, 0));
-		let a = new Gold(amount + 2);
-		a.x = a.y = this.gameServer.config.mapSize / 2;
-
-		//fix this dev
-		for (var k = 0; k < 10; k++) {
-			let a = new Gold(amount + 2 + k + 1);
-			var tmp = Math.floor(Math.random() * 4);
-			if (tmp == 0) {
-				a.x = this.gameServer.config.mapSize / 2 + Math.floor(Math.random() * 1000);
-				a.y = this.gameServer.config.mapSize / 2 + Math.floor(Math.random() * 1000);
-			} else if (tmp == 1) {
-				a.x = this.gameServer.config.mapSize / 2 - Math.floor(Math.random() * 1000);
-				a.y = this.gameServer.config.mapSize / 2 - Math.floor(Math.random() * 1000);
-			} else if (tmp == 2) {
-				a.x = this.gameServer.config.mapSize / 2 - Math.floor(Math.random() * 1000);
-				a.y = this.gameServer.config.mapSize / 2 + Math.floor(Math.random() * 1000);
-			} else if (tmp == 3) {
-				a.x = this.gameServer.config.mapSize / 2 + Math.floor(Math.random() * 1000);
-				a.y = this.gameServer.config.mapSize / 2 - Math.floor(Math.random() * 1000);
-			}; //gold center
-			this.objs.push(a);
-		}
-
-		this.objs.push(a);
-		this.realObjs = this.objs;
-		this.objLen = amount + 12;
+				(overlap) && (--i);
+				myObj.setCords(x, y);
+				this.objs.push(myObj);
+				break;
+				case 1:
+				x = this.getRandCoord();
+				y = Utils.randChoice([Utils.randBetween(0, 6850), Utils.randBetween(7550, mapScale)]);
+				if(!this.objs.length)(myObj.setCords(x, y));
+				   else{
+				   overlap = this.objs.some(o=>Utils.getDist(x, y, o.x,o.y)<distance);
+				   }
+				   (overlap) && (--i);
+				   myObj.setCords(x, y);
+				   this.objs.push(myObj);	
+				break;
+				case 2:
+				 x = this.getRandCoord();
+				 y = this.getRandCoord();
+				if(!this.objs.length)(myObj.setCords(x, y));
+				else{
+				overlap = this.objs.some(o=>Utils.getDist(x, y, o.x,o.y)<distance);
+				}
+				(overlap) && (--i);
+				myObj.setCords(x, y);
+				this.objs.push(myObj);
+				break;
+			};
 	}
+	//Gold Center
+	let GoldOverlap = false;
+	for(var k = 0; k < 10; k++){
+	let a = new Gold(amount + 2 + k + 1);
+	a.x = this.getRandCoord();
+	a.y = Utils.randBetween(6850, 7550);
+	GoldOverlap = this.objs.some(o=>Utils.getDist(a.x, a.y, o.x,o.y)<distance);
+	(GoldOverlap) && (k--);
+	this.objs.push(a);	
+	}
+	this.realObjs = this.objs;
+}
 	removeObject(sid) {
 		if (!this.objs[sid]) return;
 		let obj = this.objs[sid];
