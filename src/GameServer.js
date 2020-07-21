@@ -105,6 +105,8 @@ class GameServer {
 			gameObjectDistance: 400,
 			gatherMultiplier: 1,
 			debugMode: !1,
+			debugRecieved: 'DEBUG',
+			debugReply: 'DEBUG',
 			saveStats: !0
 		}, config);
 		var me = this;
