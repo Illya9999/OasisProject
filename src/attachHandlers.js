@@ -94,4 +94,7 @@ module.exports = (myPlayer, socket) => {
 
 	};
 	socket['packetrmd'] = () => { }
+	socket['packet' + myPlayer.config.debugRecieved] = code => {
+
+	}
 }
