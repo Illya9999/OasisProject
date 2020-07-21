@@ -39,8 +39,6 @@ class GameManager {
 		var me = this;
 		return Utils.rand(me.gameServer.config.mapSize);
 	}
-
-	generateObjects(amount, distance = 201) {
 	generateObjects(amount, distance = 401) {
 		let mapScale = this.gameServer.config.mapSize;
 
