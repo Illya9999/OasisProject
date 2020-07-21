@@ -41,11 +41,10 @@ class GameManager {
 	}
 	generateObjects(amount, distance = 401) {
 		let mapScale = this.gameServer.config.mapSize;
-
 		// Create random objects
 		this.objLen = amount;
 		this.objs.push(new PlayerObj(amount + 1, { player: { sid: 1, gameServer: { objs: this }, itemCache: [] } }, 1000, 1000, 0));
-		for (var i = 0; i < amount; ++i) {
+		for (var i = 0; i < amount; i++) {
 			var RandomObject = this.getSpawnableObj();
 			let x;
 			let y;
@@ -59,7 +58,10 @@ class GameManager {
 				else{
 				overlap = this.objs.some(o=>Utils.getDist(x, y, o.x,o.y)<distance);
 				}
-				(overlap) && (--i);
+				if(overlap){
+				i--
+				break;
+				};
 				myObj.setCords(x, y);
 				this.objs.push(myObj);
 				break;
@@ -70,7 +72,10 @@ class GameManager {
 				   else{
 				   overlap = this.objs.some(o=>Utils.getDist(x, y, o.x,o.y)<distance);
 				   }
-				   (overlap) && (--i);
+				   if(overlap){
+					i--
+					break;
+					};
 				   myObj.setCords(x, y);
 				   this.objs.push(myObj);	
 				break;
@@ -81,7 +86,10 @@ class GameManager {
 				else{
 				overlap = this.objs.some(o=>Utils.getDist(x, y, o.x,o.y)<distance);
 				}
-				(overlap) && (--i);
+				if(overlap){
+					i--
+					break;
+					};
 				myObj.setCords(x, y);
 				this.objs.push(myObj);
 				break;
@@ -94,7 +102,10 @@ class GameManager {
 	a.x = this.getRandCoord();
 	a.y = Utils.randBetween(6850, 7550);
 	GoldOverlap = this.objs.some(o=>Utils.getDist(a.x, a.y, o.x,o.y)<distance);
-	(GoldOverlap) && (k--);
+	if(GoldOverlap){
+	k--
+	break;
+};
 	this.objs.push(a);	
 	}
 	this.realObjs = this.objs;
