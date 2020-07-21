@@ -39,7 +39,7 @@ class GameManager {
 		var me = this;
 		return Utils.rand(me.gameServer.config.mapSize);
 	}
-	generateObjects(amount, distance = 200) {
+	generateObjects(amount, distance = 201) {
 		// Create random objects
 		this.objLen = amount;
 		for (var i = 0; i < amount; ++i) {
