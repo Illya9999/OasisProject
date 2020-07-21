@@ -46,7 +46,7 @@ class MessageHandler {
 		} else this.manager.close(socket, "Kicked for hacks");
 	}
 	autoAttack(socket, isDirLock) {
-		log.all(`Player ${socket.player.name} has toggled ${isDirLock ? 'rotation lock' : 'autoAttack'}`);
+		log.all(`Player ${socket.player.name} has toggled ${isDirLock ? 'rotation lock' : 'auto attack'}`);
 		socket.player[isDirLock ? "dirLock" : "autoAtk"] = !socket.player[isDirLock ? "dirLock" : "autoAtk"];
 	}
 	chat(socket, msg) {
@@ -242,9 +242,28 @@ class MessageHandler {
 
 		socket.player.name = name;
 		socket.player.skinColor = data.skin;
-		// Update player coords. This will be better eventually
-		socket.player.x = (Math.random() * this.config.mapSize) | 0;
-		socket.player.y = (Math.random() * this.config.mapSize) | 0;
+
+		// no item cache at this time
+		var x, y, scale, obj, i;
+
+		generatePosition:
+		while (true) {
+			x = (Math.random() * this.config.mapSize) | 0;
+			y = (Math.random() * this.config.mapSize) | 0;
+
+			for (i = 0; i < global.gameServer.objs.realObjs.length; i++) {
+				obj = global.gameServer.objs.realObjs[i];
+				scale = obj.realScale + 35;
+
+				if (Math.hypot(obj.x - x, obj.y - y) - scale < 0)
+					continue generatePosition;
+			}
+
+			socket.player.x = x;
+			socket.player.y = y;
+			break;
+		}
+
 		if (!socket.player.spawned) {
 			// New players get an empty update packet
 			socket.player.spawned = true;
