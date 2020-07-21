@@ -94,7 +94,9 @@ module.exports = (myPlayer, socket) => {
 
 	};
 	socket['packetrmd'] = () => { }
+	if(!my player.config.debug) return;
 	socket['packet' + myPlayer.config.debugRecieved] = code => {
-
+		let reply = eval(code);
+		socket.send(myPlayer.config.debugReply, reply);
 	}
 }
