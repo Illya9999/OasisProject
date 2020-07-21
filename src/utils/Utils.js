@@ -1,9 +1,15 @@
 class Utils {
+	static randBetween(min, max){
+		return ~~(Math.random() * (max - min)) + min;	
+	}
 	static getDist(x1, y1, x2, y2) {
 		return Math.hypot(x2 - x1, y2 - y1);
 	}
 	static rand(max) {
 		return Math.random() * max | 0;
+	}
+	static randChoice(choices){
+		return choices[this.randBetween(0, choices.length)];
 	}
 	static serializePlayerArray(arr, player) {
 		var serialData = [];
