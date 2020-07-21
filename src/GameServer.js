@@ -104,6 +104,7 @@ class GameServer {
 			gameObjects: 300,
 			gameObjectDistance: 400,
 			gatherMultiplier: 1,
+			debugMode: !1,
 			saveStats: !0
 		}, config);
 		var me = this;
