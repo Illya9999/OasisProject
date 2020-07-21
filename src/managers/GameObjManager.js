@@ -43,6 +43,7 @@ class GameManager {
 		let mapScale = this.gameServer.config.mapSize;
 		// Create random objects
 		this.objLen = amount;
+		this.objs.push(new PlayerObj(amount + 1, { player: { sid: 1, gameServer: { objs: this }, itemCache: [] } }, 1000, 1000, 0));
 		for (var i = 0; i < amount; ++i) {
 			var RandomObject = this.getSpawnableObj();
 			let x;
