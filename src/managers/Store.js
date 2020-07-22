@@ -2,7 +2,7 @@ var shop = require('../utils/shopItems');
 
 class Store {
 	canBuyItem(socket, item) {
-		return (socket.player.points >= item.price);
+		return (socket.player.points >= item.price || global.sandbox);
 	}
 	getItemById(id, isTail = !1) {
 		var me = this;
