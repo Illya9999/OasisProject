@@ -107,10 +107,12 @@ class GameServer {
 			debugMode: !1,
 			debugRecieved: 'DEBUG',
 			debugReply: 'DEBUG',
-			saveStats: !0
+			saveStats: !1,
+			sandbox: !1
 		}, config);
 		var me = this;
 		this.config = config;
+		this.sandbox = config.sandbox;
 		this.atkInterval = config.tickInterval * 2;
 		this.io = null; // The websocket server
 		this.currentTick = 0;
