@@ -3,7 +3,6 @@ const { SERVER } = require("../utils/packetCodes");
 
 var Items1 = require("./Items");
 
-let possibleAngles = [0, 0.79, 1.57, 2.36, 3.14, -2.36, -1.57, -0.79]; //anti bot stuff gg
 class MessageHandler {
 	checkConnection(socket) {
 		var me = this;
@@ -38,8 +37,6 @@ class MessageHandler {
 	}
 	move(socket, direction) {
 		if (socket.player.connected && typeof direction === "number") {
-			if (!possibleAngles.includes(direction))
-				return this.manager.close(socket, "Kicked for hacks");
 			socket.player.moveDir = direction;
 		} else if (direction == null) {
 			socket.player.moveDir = null;
