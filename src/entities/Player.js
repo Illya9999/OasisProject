@@ -235,13 +235,12 @@ class Player {
 	}
 	canBuild(item) {
 		var me = this;
-		console.log(item)
 		return (
 			me.stone >= item.costs.stone &&
 			me.wood >= item.costs.wood &&
 			me.food >= item.costs.food &&
 			(item.place ? me.placeCounter[item.group.id] < item.group.limit : !0)
-		);
+		) || this.gameServer.sandbox;
 	}
 	updateHealth(amount, doer, bypass) {
 		if (amount > 0 && this.health >= this.maxHealth) return !1;
