@@ -75,7 +75,7 @@ class MessageHandler {
 			log.all(socket.player.name + " attempted to buy item " + item.name);
 			if (this.store.canBuyItem(socket, item)) {
 				socket.player.addItem(item, isTail);
-				socket.player.points -= item.price;
+				global.gameServer.sandbox || (socket.player.points -= item.price);
 				this.manager.updateStore(socket, 0, item.id, isTail);
 				socket.player.updateMaterial("points");
 				log.all(socket.player.name + " has purchased item " + item.name);
