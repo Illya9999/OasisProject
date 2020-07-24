@@ -291,7 +291,7 @@ module.exports = {
             name: "Tank Gear",
             price: 15e3,
             scale: 120,
-            desc: "increased damage to buildings but slower movement",
+            desc: "increased damage to buildings but you move way slower",
             spdMult: .3,
             bDmg: 3.3
         }, {
@@ -299,14 +299,14 @@ module.exports = {
             name: "Thief Gear",
             price: 15e3,
             scale: 120,
-            desc: "steal half of a players gold when you kill them",
+            desc: "steal half of a players total gold when you kill them",
             goldSteal: .5
         }, {
             id: 55,
             name: "Bloodthirster",
             price: 2e4,
             scale: 120,
-            desc: "Restore Health when dealing damage. And increased damage",
+            desc: "Restores health when dealing damage and increased damage",
             healD: .25,
             dmgMultO: 1.2
         }, {
@@ -314,7 +314,7 @@ module.exports = {
             name: "Assassin Gear",
             price: 2e4,
             scale: 120,
-            desc: "Go invisible when not moving. Can't eat. Increased speed",
+            desc: "Go invisible when not moving, can't heal/eat and, increased speed",
             noEat: !0,
             spdMult: 1.1,
             invisTimer: 1e3
@@ -372,44 +372,44 @@ module.exports = {
 			name: "Winter Cape",
 			price: 3e3,
 			scale: 90,
-			desc: "no effect"
+			desc: "makes you look cool but it's useless"
 		}, {
 			id: 4,
 			name: "Skull Cape",
 			price: 4e3,
 			scale: 90,
-			desc: "no effect"
+			desc: "makes you look cool but it's useless"
 		}, {
 			id: 5,
 			name: "Dash Cape",
 			price: 5e3,
 			scale: 90,
-			desc: "no effect"
+			desc: "makes you look cool but it's useless"
 		}, {
 			id: 2,
 			name: "Dragon Cape",
 			price: 6e3,
 			scale: 90,
-			desc: "no effect"
+			desc: "makes you look cool but it's useless"
 		}, {
 			id: 1,
 			name: "Super Cape",
 			price: 8e3,
 			scale: 90,
-			desc: "no effect"
+			desc: "makes you look cool but it's useless"
 		}, {
 			id: 7,
 			name: "Troll Cape",
 			price: 8e3,
 			scale: 90,
-			desc: "no effect"
+			desc: "makes you look cool but it's useless"
 		}, {
 			id: 14,
 			name: "Thorns",
 			price: 1e4,
 			scale: 115,
 			xOff: 20,
-			desc: "no effect"
+            desc: "no effect"
 		}, {
 			id: 15,
 			name: "Blockades",
