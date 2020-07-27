@@ -54,8 +54,8 @@ class GameManager {
 				case 0:
 				 x = this.getRandCoord();
 				 y = Utils.randChoice([Utils.randBetween(0, 6850), Utils.randBetween(7550, mapScale-2400)]);
-				if(!this.objs.length)(myObj.setCords(x, y));
-				else{
+				if(this.objs.length)
+				{
 				overlap = this.objs.some(o=>Utils.getDist(x, y, o.x,o.y)<distance);
 				}
 				if(overlap){
@@ -68,8 +68,8 @@ class GameManager {
 				case 1:
 				x = this.getRandCoord();
 				y = Utils.randChoice([Utils.randBetween(0, 6850), Utils.randBetween(7550, mapScale)]);
-				if(!this.objs.length)(myObj.setCords(x, y));
-				   else{
+				if(this.objs.length)
+				   {
 				   overlap = this.objs.some(o=>Utils.getDist(x, y, o.x,o.y)<distance);
 				   }
 				   if(overlap){
@@ -82,8 +82,8 @@ class GameManager {
 				case 2:
 				 x = this.getRandCoord();
 				 y = this.getRandCoord();
-				if(!this.objs.length)(myObj.setCords(x, y));
-				else{
+				if(this.objs.length)
+				{
 				overlap = this.objs.some(o=>Utils.getDist(x, y, o.x,o.y)<distance);
 				}
 				if(overlap){
