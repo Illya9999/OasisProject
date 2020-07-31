@@ -1,10 +1,8 @@
 //Imports
 var MessageHandler = require('./managers/MessageHandler');
-var Player = require('./entities/Player');
 var log = require('./utils/Logger');
 var Manager = require('./managers/PlayerManager');
 var Leaderboard = require('./entities/Leaderboard');
-var Utils = require('./utils/Utils');
 var ClanManager = require('./managers/ClanManager');
 var Minimap = require("./managers/MinimapManager");
 var GameObjManager = require('./managers/GameObjManager');
