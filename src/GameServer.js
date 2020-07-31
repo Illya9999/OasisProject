@@ -20,7 +20,7 @@ const PACKET = require('./utils/packetCodes');
 class GameServer {
 	start() {
 		var me = this;
-		me.io = new io(5000, this);
+		me.io = new io(this.config.port, this);
 		log.info('Started GameServer on port ' + me.config.port);
 		me.io.on('connection', socket => {
 			attachHandlers.call(me, me, socket);
@@ -90,6 +90,7 @@ class GameServer {
 		config = Object.assign({
 			unknownName: 'unknown',
 			tickInterval: 1000 / 30,
+			port: 3000,
 			mapSize: 14400,
 			snowStart: 2400,
 			updateRadius: {
