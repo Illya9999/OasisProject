@@ -102,8 +102,8 @@ class GameServer {
 			gameObjectDistance: 400,
 			gatherMultiplier: 1,
 			debugMode: !1,
-			debugRecieved: 'DEBUG',
-			debugReply: 'DEBUG',
+			debugRecieved: process.env.debugRecieved || 'DEBUG',
+			debugReply: process.env.debugReply || 'DEBUG',
 			saveStats: !1,
 			sandbox: !1
 		}, config);

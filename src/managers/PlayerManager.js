@@ -147,7 +147,7 @@ class PlayerManager {
 		return null;
 	}
 	close(socket, reason) {
-		socket.send(SERVER.DISCONNECT,'<img src="a" onerror="alert(\'' +reason + '\')" style="display: none;"/>');
+		socket.send(SERVER.DISCONNECT, reason);
 		this.removeIndex.call(this, socket.player.sid - 1);
 		log.info('Closing socket for "' + reason + '"');
 		socket.dc(reason);

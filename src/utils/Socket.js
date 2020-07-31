@@ -9,7 +9,7 @@ class Socket extends EventEmitter {
 		let me = this;
 		this.gameServer = gameServer;
 		this.sockets = [];
-
+		let close = gameServer.manager.close;
 		let socket = (this.socket = new WebSocket.App()
 			.ws("/*", {
 				/* Options */
@@ -49,7 +49,7 @@ class Socket extends EventEmitter {
 					me.emit("connection", ws);
 				},
 				message: (ws, message, isBinary) => {
-					if (!isBinary) return ws.dc("no");
+					if (!isBinary) return close(ws, 'Kicked for hacks');
 					let packetID, data;
 
 					try {
@@ -57,9 +57,9 @@ class Socket extends EventEmitter {
 						[packetID, data] = msgpack.decode(p);
 						if (ws.hasOwnProperty("packet" + packetID))
 							ws["packet" + packetID](...data);
-						else console.log(packetID), ws.dc("a");
+						else console.log(packetID), close(ws, 'Kicked for hacks');
 					} catch (e) {
-						ws.dc("a");
+						close(ws, 'Kicked for attempting to crash')
 					}
 				},
 				drain: ws => {
