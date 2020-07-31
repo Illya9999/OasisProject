@@ -1,8 +1,4 @@
-// External package imports
-
-var io = require('./utils/Socket');
-
-// Local imports
+//Imports
 var MessageHandler = require('./managers/MessageHandler');
 var Player = require('./entities/Player');
 var log = require('./utils/Logger');
@@ -15,7 +11,7 @@ var GameObjManager = require('./managers/GameObjManager');
 var PhysicsEngine = require('./utils/PhysicsEngine');
 var Store = require('./managers/Store');
 var attachHandlers = require('./attachHandlers');
-const PACKET = require('./utils/packetCodes');
+var io = require('./utils/Socket');
 
 class GameServer {
 	start() {
