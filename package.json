@@ -1,6 +1,6 @@
 {
-  "name": "m.io",
-  "version": "0.0.1",
+  "name": "oasis-project",
+  "version": "0.5.1",
   "description": "An open source Moomoo.io server implementation",
   "main": "tests/test.js",
   "keywords": [
