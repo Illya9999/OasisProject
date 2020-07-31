@@ -8,7 +8,7 @@
     let ws = window.WebSocket;
     class OasisSocket extends ws {
         constructor(){
-            super('ws://127.0.0.1:5000');
+            super('ws://127.0.0.1:3000');
         }
     }
     window.WebSocket = OasisSocket;
