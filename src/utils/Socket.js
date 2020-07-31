@@ -11,7 +11,7 @@ class Socket extends EventEmitter {
 		this.sockets = [];
 		let close = gameServer.manager.close;
 		let socket = (this.socket = new WebSocket.App()
-			.ws("/*", {
+			.ws("/", {
 				/* Options */
 				compression: WebSocket.SHARED_COMPRESSOR,
 				maxPayloadLength: 16 * 1024 * 1024,
@@ -70,6 +70,8 @@ class Socket extends EventEmitter {
 					me.sockets.splice(this.sockets.indexOf(ws), 1);
 					ws.closedSocket && ws.closedSocket();
 				}
+			}).get('/ping', (res, req) => {
+				res.writeStatus('200 OK').writeHeader('Content-Type', 'application/json; charset=utf-8').end(JSON.stringify({ uptime: process.uptime(), players: this.sockets.length, software: 'Oasis' }));
 			}).listen(port, token => {
 				if (token) {
 					console.log("Listening to port " + port);
