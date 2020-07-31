@@ -15,7 +15,7 @@
   "dependencies": {
     "eventemitter3": "^4.0.4",
     "msgpack-lite": "^0.1.26",
-    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v18.3.0"
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v18.4.0"
   },
   "license": "MIT"
 }
