@@ -18,6 +18,7 @@ module.exports = {
         MOVE: "33"
     },
     SERVER: {
+		ANNOUNCE: 'ann',
         INIT_PLAYER: 'io-init',
         INIT_TRIBES: 'id',
         PLAYER_SET_ID: '1', //sent short after each spawn
