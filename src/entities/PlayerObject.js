@@ -13,6 +13,7 @@ class PlayerObject extends GameObj {
 		this.noGather = !0;
 		this.objManager = owner.gameServer.objs;
 		owner.itemCache.push(this);
+		owner.updateFrames = 5;
 	}
 	static place(owner) {
 		owner.wood -= this.costs.wood;

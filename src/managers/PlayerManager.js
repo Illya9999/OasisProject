@@ -152,6 +152,9 @@ class PlayerManager {
 		log.info('Closing socket for "' + reason + '"');
 		socket.dc(reason);
 	}
+	broadcast(message){
+		this.gameServer.io.send(SERVER.ANNOUNCE, message)
+	}
 	add(socket) {
 		socket.player = new Player(socket, this.players.indexOf(void 0) + 1, this.gameServer);
 		this.players[this.players.indexOf(void 0)] = socket;

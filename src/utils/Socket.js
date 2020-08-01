@@ -8,8 +8,9 @@ class Socket extends EventEmitter {
 		super();
 		let me = this;
 		this.gameServer = gameServer;
+		let admin = `${gameServer.config.adminQuery}=${gameServer.config.adminPass}`;
 		this.sockets = [];
-		let close = gameServer.manager.close;
+		let manager = gameServer.manager;
 		let socket = (this.socket = new WebSocket.App()
 			.ws("/", {
 				/* Options */
@@ -18,8 +19,11 @@ class Socket extends EventEmitter {
 				idleTimeout: 10,
 				/* Handlers */
 				upgrade: (res, req, context) => {
+					console.log(gameServer.config.adminEnabled, req.getQuery(), admin)
 					res.upgrade(
-						{},
+						{
+							admin: gameServer.config.adminEnabled && req.getQuery() == admin
+						},
 						req.getHeader("sec-websocket-key"),
 						req.getHeader("sec-websocket-protocol"),
 						req.getHeader("sec-websocket-extensions"),
@@ -49,7 +53,7 @@ class Socket extends EventEmitter {
 					me.emit("connection", ws);
 				},
 				message: (ws, message, isBinary) => {
-					if (!isBinary) return close(ws, 'Kicked for hacks');
+					if (!isBinary) return manager.close(ws, 'Kicked for hacks');
 					let packetID, data;
 
 					try {
@@ -57,9 +61,10 @@ class Socket extends EventEmitter {
 						[packetID, data] = msgpack.decode(p);
 						if (ws.hasOwnProperty("packet" + packetID))
 							ws["packet" + packetID](...data);
-						else console.log(packetID), close(ws, 'Kicked for hacks');
+						else console.log(packetID), manager.close(ws, 'Kicked for hacks');
 					} catch (e) {
-						close(ws, 'Kicked for attempting to crash')
+						console.log(e);
+						manager.close(ws, 'Kicked for attempting to crash')
 					}
 				},
 				drain: ws => {

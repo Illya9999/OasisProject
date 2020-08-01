@@ -1,5 +1,6 @@
 var log = require("../utils/Logger");
 const { SERVER } = require("../utils/packetCodes");
+const CommandHandler = require('./CommandHandler');
 
 var Items1 = require("./Items");
 
@@ -49,10 +50,20 @@ class MessageHandler {
 	chat(socket, msg) {
 		let me = this;
 		if (typeof msg !== "string") return;
+		msg = msg.trim();
+		if (msg.startsWith('/') && socket.admin) return this.msgHandler.handleCmd.call(this, socket, msg);
 		let near = socket.player.allNear;
 		for (var i = near.length; i--;) {
 			this.manager.sendChat(socket, near[i], msg);
 		}
+
+	}
+	handleCmd(socket, msg) {
+		const args = msg.substring(1).split(/\s+/g),
+		cmd = args.shift().toLowerCase();
+		console.log(cmd, args);
+		if(!CommandHandler.has(cmd)) return;
+		CommandHandler.get(cmd).call(this.manager, socket.player, ...args);
 	}
 	syncClanPlayers(socket, data) {
 		socket.send(SERVER.SET_CLAN_PLAYERS, data);
@@ -123,7 +134,7 @@ class MessageHandler {
 		}
 	}
 	doUpgrade(socket, id) {
-		console.log(socket.player.name + " tried to upgrade with id " + id);
+		log.all(socket.player.name + " tried to upgrade with id " + id);
 		var age = socket.player.upgrAge;
 		var pts = socket.player.upgradePoints;
 		let list = Items1.weapons;
@@ -147,11 +158,10 @@ class MessageHandler {
 		socket.player.upgradePoints--;
 		socket.player.upgrAge++;
 		this.manager.syncPlayerItems(socket);
-		this.manager.sendUpgrades(socket, socket.player.upgradePoints,socket.player.upgrAge);
+		this.manager.sendUpgrades(socket, socket.player.upgradePoints, socket.player.upgrAge);
 	}
 	attack(socket, atk, buildDir) {
 		var me = this;
-		console.log(buildDir, socket.player.angle)
 		if (socket.player.alive) {
 			if (socket.player.buildCode === -1) {
 				socket.player.attacking = !!atk; // Regular attack
@@ -188,13 +198,13 @@ class MessageHandler {
 		//mfw we call this method from 2 diffrent scopes
 		if (!socket.player.team)
 			return (this.manager || this).close(socket, "Kicked for hacks");
-		log.all('Player "' + socket.player.name + '" is leaving their clan ' +socket.player.team);
+		log.all('Player "' + socket.player.name + '" is leaving their clan ' + socket.player.team);
 		try {
 			if (socket.player.isTribeOwner)
-				return ((socket.player.isTribeOwner = 0),this.msgHandler.deleteClan.call(this, socket.player.clan, socket));
+				return ((socket.player.isTribeOwner = 0), this.msgHandler.deleteClan.call(this, socket.player.clan, socket));
 		} catch (e) {
 			if (socket.player.isTribeOwner)
-				return ((socket.player.isTribeOwner = 0),this.deleteClan.call(this, socket.player.clan, socket));
+				return ((socket.player.isTribeOwner = 0), this.deleteClan.call(this, socket.player.clan, socket));
 		}
 		let clan = socket.player.clan;
 		if (!clan) return;
@@ -222,14 +232,14 @@ class MessageHandler {
 			this.io.send(SERVER.CLAN_ADD, newClanData);
 			// Set the player's clan to the new clan
 			socket.send(SERVER.PLAYER_SET_CLAN, newClanData.sid, 1);
-			this.msgHandler.syncClanPlayers(socket,socket.player.clan.serializeMembers());
+			this.msgHandler.syncClanPlayers(socket, socket.player.clan.serializeMembers());
 			log.all("Clan '" + clanName + "' has been created by " + socket.player.name);
 		}
 	}
 	spawn(socket, data) {
 		var me = this;
 		if (!this.msgHandler.checkConnection.call(me, socket))
-			return console.log("super error");
+			return log.all("super error");
 		// Player can spawn, update their name
 		let close = this.close || this.manager.close;
 		if (data.name == void 0 || typeof data.name !== "string" || data.skin == void 0 || typeof data.skin !== "number" || isNaN(data.skin) || data.skin < 0 || data.skin > 9)
@@ -277,7 +287,7 @@ class MessageHandler {
 			socket.player.alive = true;
 			me.manager.updateHealth(socket, 0);
 			//me.manager.addSelfPlayer(socket);
-			socket.send(SERVER.UPDATE_HEALTH,socket.player.sid,socket.player.health);
+			socket.send(SERVER.UPDATE_HEALTH, socket.player.sid, socket.player.health);
 
 			// Send player data to player
 
@@ -301,7 +311,7 @@ class MessageHandler {
 			} else if (socket.player.items.includes(index)) {
 				var item = Items1.list[index];
 				if (item) {
-					console.log(socket.player.buildCode)
+					log.all(socket.player.buildCode)
 					socket.player.buildCode = item.id;
 					socket.player.attacking = !1;
 

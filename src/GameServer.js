@@ -103,7 +103,10 @@ class GameServer {
 			debugRecieved: process.env.debugRecieved || 'DEBUG',
 			debugReply: process.env.debugReply || 'DEBUG',
 			saveStats: !1,
-			sandbox: !1
+			sandbox: !1,
+			adminEnabled: !1,
+			adminQuery: process.env.adminQuery || 'pw',
+			adminPass: process.env.adminPass || 'admin'
 		}, config);
 		var me = this;
 		this.config = config;

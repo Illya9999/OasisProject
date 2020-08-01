@@ -10,7 +10,6 @@ class PhysicsEngine {
 			var obj = objs[j];
 			if (hypot(obj.x - x, obj.y - y) < scale + obj.realScale) return !1;
 		}
-		console.log('yay')
 		return !0;
 	}
 	objectCollision(p, mx, my) {
@@ -33,8 +32,8 @@ class PhysicsEngine {
 				let dir = atan2(my - obj.y, mx - obj.x);
 				mx = obj.x + s * cos(dir);
 				my = obj.y + s * sin(dir);
-				p.player.xVel *= .75;
-				p.player.yVel *= .75;
+				p.player.xVel *= .83;
+				p.player.yVel *= .83;
 				if (obj.dmg && !(obj.owner && obj.owner.team !== p.player.team)) {
 					p.player.xVel += cos(dir);
 					p.player.yVel += sin(dir);
