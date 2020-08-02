@@ -12,7 +12,7 @@ class Socket extends EventEmitter {
 		this.sockets = [];
 		let manager = gameServer.manager;
 		let socket = (this.socket = new WebSocket.App()
-			.ws("/", {
+			.ws("/*", {
 				/* Options */
 				compression: WebSocket.SHARED_COMPRESSOR,
 				maxPayloadLength: 16 * 1024 * 1024,
