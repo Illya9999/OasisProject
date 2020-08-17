@@ -1,3 +1,5 @@
+### This project is not currently maintained. If you want a maintained working MooMoo.io private server, see https://github.com/Picoseconds/sanctuary
+
 # **WARNING**
 **ANY PRIVATE MOOMOO.IO SERVER THAT YOU CONNECT TO HAS THE ABILITY TO EXECUTE MALICIOUS CODE IN YOUR BROWSER DUE TO A BUG IN MOOMOO'S CODE. ONLY CONNECT TO SERVERS RUN BY TRUSTED PEOPLE**
 
