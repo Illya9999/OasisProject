@@ -1,5 +1,5 @@
 # **WARNING**
-**ANY PRIVATE MOOMOO.IO SERVER THAT YOU CONNECT TO HAS THE ABILITY TO EXECUTE MALICIOUS CODE IN YOUR BROWSER DUE TO A BUG IN MOOMOO'S CODE. ONLY CONNECT TO SERVERS RUN BY TRUSTED PEOPLE**
+**This code is terrible and riddled with exploits, use Sanctuary instead of this trash**
 
 # The Oasis project
 The goal of the Oasis project is to create a server that is free from hacks and crashes so that it is actually playable
